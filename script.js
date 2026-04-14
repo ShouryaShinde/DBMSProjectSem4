@@ -1,5 +1,6 @@
 import express from "express" ;
 import bodyParser from "body-parser";
+import authRoutes from "./routes/auth.js" ;
 import axios from "axios" ;
 
 const app = express();
@@ -17,11 +18,7 @@ app.get("/" , (req,res) => {
   res.render("auth/Login") ;
 });
 
-app.post("/login" , (req ,res) => {
-  const {email , password , action} = req.body ;
-  console.log(action) ;
-  console.log(email , password) ;
-});
+app.use("/login" , authRoutes) ;
 
 app.listen(port , () => {
   console.log(`Listinening on http://localhost:${port}`) ;
