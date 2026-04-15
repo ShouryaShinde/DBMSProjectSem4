@@ -7,8 +7,8 @@
       <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">VehicleBay</h1>
       <p class="lead">This is a Student developed project made for understanding and practicing DBMS in the website</p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start"> 
-        <a href="/login" class="btn btn-primary">Login</a>
-        <a href="/search" class="btn btn-secondary">Check Status</a>
+        <a href="/book" class="btn btn-primary">Book a service</a>
+        <a href="/search" class="btn btn-outline-primary">Check Status</a>
       </div>
   </div>
 
@@ -20,8 +20,9 @@
       text-bg-primary bg-gradient rounded-3 p-3 mb-3" style="width: 3rem; height: 3rem;">
         <i class="bi bi-car-front-fill fs-5"></i>
       </div>
-      <h3 class="fs-2 text-body-emphasis">Easy Service Booking</h3>
+      <h3 class="fs-2 text-body-emphasis">Easy Service <br>Booking</h3>
       <p>Quickly book vehicle service online</p> 
+      <a href="/book" class="primary">Book a service <i class="bi bi-arrow-right-short"></i></a>
     </div>
     <div class="feature col">
       <div class="feature-icon d-inline-flex align-items-center justify-content-center 
@@ -29,7 +30,7 @@
         <i class="bi bi-calendar-check fs-5"></i>
       </div>
       <h3 class="fs-2 text-body-emphasis">Smart Scheduling</h3>
-      <p>Select preferred date and time for service appointments.</p>
+      <p>Select preferred date and time <br>for service appointments.</p>
     </div>
     <div class="feature col">
       <div class="feature-icon d-inline-flex align-items-center justify-content-center 
@@ -38,6 +39,7 @@
       </div>
       <h3 class="fs-2 text-body-emphasis">Real-Time Status Tracking</h3>
       <p>Track service progress <br/>Pending → In Progress → Completed.</p> 
+      <a href="/search" class="primary">Check Status<i class="bi bi-arrow-right-short"></i></a>
     </div>
   </div>
 <%- include("partials/footer.ejs")%>
