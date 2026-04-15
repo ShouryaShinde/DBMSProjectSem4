@@ -1,11 +1,10 @@
 import express from "express" ;
-import bodyParser from "body-parser";
+import session from "express-session";
+import dotenv from "dotenv" ;
 import authRoutes from "./routes/auth.js" ;
 import bookServiceRoutes from "./routes/bookService.js" ;
 import checkStatusRoutes from "./routes/checkStatus.js" ;
-import axios from "axios" ;
-import session from "express-session";
-import dotenv from "dotenv" ;
+import dashboardRoutes from "./routes/dashboard.js" ;
 
 dotenv.config() ;
 
@@ -38,11 +37,10 @@ app.get("/home" , isAuthenticated, (req,res) => {
   res.render("home") ;
 });
 
-app.use("/book" , bookServiceRoutes) ;
-
 app.use("/login" , authRoutes) ;
-
-app.use("/checkstatus" , checkStatusRoutes) ;
+app.use("/book" , isAuthenticated ,bookServiceRoutes) ;
+app.use("/checkstatus" , isAuthenticated , checkStatusRoutes) ;
+app.use("/dashboard" , isAuthenticated , dashboardRoutes);
 
 app.listen(port , () => {
   console.log(`Listinening on http://localhost:${port}`) ;

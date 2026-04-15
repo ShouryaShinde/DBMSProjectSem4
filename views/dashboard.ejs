@@ -1,0 +1,91 @@
+<%- include("partials/header.ejs")%>
+
+<div class="vh-100">
+  <h2>Dashboard </h2>
+  <div class="container mt-5">
+    <div class="row g-4">
+      <!-- Service Bays Card -->
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100 p-3 text-center">
+          <h5 class="mb-3 text-muted">
+            <i class="bi bi-shop-window me-1"></i> Service Bays
+          </h5>
+          <h2><%= bays.total_bays %></h2>
+          <p class="text-muted mb-3">Total Bays</p>
+          <div class="d-flex justify-content-around">
+            <span class="text-success">Free: <%= bays.free_bays %></span>
+            <span class="text-primary">Occupied: <%= bays.occupied_bays %></span>
+            <span class="text-danger">Maintainence: <%= bays.maintenance_bays %></span>
+          </div>
+        </div>
+      </div>
+      <!-- Service Requests Card -->
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100 p-3 text-center">
+          <h5 class="mb-3 text-muted">
+            <i class="bi bi-clipboard-data me-1"></i> Requests
+          </h5>
+          <h2><%= bookings.total_requests %></h2>
+          <p class="text-muted mb-3">Total Requests</p>
+          <div class="d-flex justify-content-around">
+            <span class="text-warning">Pending: <%= bookings.pending %></span>
+            <span class="text-primary">Progress: <%= bookings.in_progress %></span>
+            <span class="text-success">Done: <%= bookings.completed %></span>
+          </div>
+        </div>
+      </div>
+      <!-- Mechanics Card -->
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100 p-3 text-center">
+          <h5 class="mb-3 text-muted">
+            <i class="bi bi-person-gear me-1"></i> Mechanics
+          </h5>
+          <h2><%= mechanics.total_mechanics %></h2>
+          <p class="text-muted">Available Mechanics</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="my-5">
+  <div class="container mt-5">
+    <h4 class="mb-3">Waiting Queue</h4>
+    <% if (upcoming.length === 0) { %>
+      <p class="text-muted">No ongoing services.</p>
+    <% } else { %>
+      <ul class="list-group shadow-sm">
+        <% upcoming.forEach(service => { %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <!-- Left Side -->
+            <div>
+              <h6 class="mb-1">
+                <i class="bi bi-car-front me-2"></i>
+                <%= service.license_plate %>
+              </h6>
+              <small class="text-muted">
+                <%= service.service_type %>
+              </small>
+            </div>
+            <!-- Right Side -->
+            <div class="text-end">
+              <!-- Status Badge -->
+              <span class="badge 
+                <%= service.status === 'Pending' ? 'bg-warning text-dark' :
+                    'bg-primary' %> mb-1">
+                <%= service.status %>
+              </span>
+              <div class="small text-muted">
+                <i class="bi bi-calendar-event me-1"></i>
+                <%= new Date(service.expected_return_date).toLocaleDateString('en-IN', {
+                  day: 'numeric',
+                  month: 'short'
+                }) %>
+              </div>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </div>
+</div>
+
+<%- include("partials/footer.ejs")%>
