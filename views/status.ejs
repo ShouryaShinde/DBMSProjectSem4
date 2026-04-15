@@ -1,0 +1,81 @@
+<%- include("partials/header.ejs") %>
+
+<main class="flex-grow-1 py-5">
+  <!-- Status Header Card -->
+  <div class="container mb-4">
+    <h3 class="mb-2">Vehicle Service Status</h3>
+    <p class="text-muted mb-0">
+      Track your booking progress and expected completion.
+    </p>
+  </div>
+  <% if (bookings.length === 0) { %>
+    <!-- Empty State -->
+    <div class="container text-center py-5">
+      <i class="bi bi-car-front fs-1 text-muted"></i>
+      <h4 class="mt-3">No bookings found</h4>
+      <p class="text-muted">Try another vehicle or book a service.</p>
+      <a href="/book" class="btn btn-primary mt-2">Book Service</a>
+    </div>
+<% } else { %>
+    <div class="container">
+      <div class="row g-4">
+        <% bookings.forEach(b => { %>
+          <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm h-100">
+              <div class="card-body">
+                <!-- Booking ID -->
+                <h6 class="card-subtitle mb-2 text-muted">
+                  Booking #<%= b.booking_id %>
+                </h6>
+                <!-- Service -->
+                <h5 class="card-title">
+                  Service Type : <%= b.service_type %>
+                </h5>
+                <!-- Status Badge -->
+                <span class="badge 
+                  <%= b.status === 'Pending' ? 'bg-warning text-dark' :
+                      b.status === 'In Progress' ? 'bg-primary' :
+                      'bg-success' %> mb-2">
+                  Status : <%= b.status %>
+                </span>
+                <!-- Return Date -->
+                <p class="mt-2 mb-1">
+                  <strong>Return Date:</strong><br>
+                  <%= new Date(b.expected_return_date).toLocaleDateString('en-IN', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                  }) %>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  <% } %>
+  <!-- Divider -->
+  <hr class="my-5">
+  <!-- Feature Section -->
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <i class="bi bi-clock fs-2 text-primary"></i>
+        <h6 class="mt-2">Fast Service</h6>
+        <p class="text-muted small">Quick turnaround time</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-shield-check fs-2 text-success"></i>
+        <h6 class="mt-2">Reliable</h6>
+        <p class="text-muted small">Trusted mechanics</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-tools fs-2 text-warning"></i>
+        <h6 class="mt-2">Quality Work</h6>
+        <p class="text-muted small">Professional servicing</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include("partials/footer.ejs") %>

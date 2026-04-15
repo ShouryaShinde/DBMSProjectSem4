@@ -2,6 +2,7 @@ import express from "express" ;
 import bodyParser from "body-parser";
 import authRoutes from "./routes/auth.js" ;
 import bookServiceRoutes from "./routes/bookService.js" ;
+import checkStatusRoutes from "./routes/checkStatus.js" ;
 import axios from "axios" ;
 import session from "express-session";
 import dotenv from "dotenv" ;
@@ -40,6 +41,8 @@ app.get("/home" , isAuthenticated, (req,res) => {
 app.use("/book" , bookServiceRoutes) ;
 
 app.use("/login" , authRoutes) ;
+
+app.use("/checkstatus" , checkStatusRoutes) ;
 
 app.listen(port , () => {
   console.log(`Listinening on http://localhost:${port}`) ;
