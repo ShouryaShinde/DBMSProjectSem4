@@ -27,7 +27,7 @@ router.post("/" , async (req ,res) => {
       try {
         const checkResult = await db.query("SELECT password FROM users WHERE email = $1" , [email]) ;
         if(checkResult.rows.length > 0) {
-          res.render("../views/auth/Login" , {errorMessage : "User already exists ! Sign In"}) ;
+          res.render("../views/auth/Login" , {errorMessage : "User already exists ! Try SignIn"}) ;
         } else {
           await db.query("INSERT INTO users (email , password) VALUES ($1 , $2)" , [email , password]) ;
           req.session.user = email;
